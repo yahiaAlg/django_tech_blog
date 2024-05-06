@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="keywords"
+      content=
+      "
+      Linux,
+      Ubuntu,
+      Debian,
+      Servers,
+      Systems administration,
+      Command line,
+      SSH,
+      Firewall,
+      SELinux,
+      Docker,
+      Kubernetes,
+      Apache,
+      Nginx,
+      PHP,
+      Python,
+      MySQL,
+      ecommerce,
+      online shopping,
+      Magento,
+      WooCommerce,
+      OPCneCommerce,
+      Shopify,
+      web hosting,
+      VPS,
+      cloud hosting,
+      online store,
+      small business ecommerce,
+      startup ecommerce,
+      PCI compliance,
+      digital marketing,
+      SEO,
+      analytics,
+      email marketing,    
+      "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %} 
+    <link href="{% static "css/css" %}?family=Titillium+Web:300,300i,700,700i" rel="stylesheet" />
+    <link href="{% static "css/app.css" %}" rel="stylesheet"/>
+    <title>System Symphosium - {% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    {% include "blog/partials/header.html" %}
+    <div class="container my-5">
+      <div class='row with-sidebar'>
+        {% block content %} {% endblock%} 
+      </div>
+    </div>
+    {% include "blog/partials/footer.html" %}
+    <script type="text/javascript" src="{% static "js/index.app.js" %}"></script>
+    {% block scripts %}{% endblock scripts %}
+  </body>
+</html>

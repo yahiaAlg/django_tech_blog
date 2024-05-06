@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <form action="{% url "login" %}" method="post" class="col-12">
+        <h2 class="text-center headline-alert text-success">Log In</h2>
+        {% bootstrap_form form %}
+        <p>
+            <a href="{% url "password_reset" %}" class="headline-alert text-small">
+                Forgotten your password?
+            </a>
+        </p>
+        <div class="row">
+            <div class="col">{% bootstrap_button button_type="reset" content="clear" %}</div>
+            <div class="col">{% bootstrap_button button_type="submit" content="submit" %}</div>
+        </div>
+
+        {% csrf_token %}
+    </form>
+{% endblock %}
+{% block scripts %}
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const buttons = document.querySelectorAll(
+                "button.btn"
+            );
+
+            console.log(buttons);
+            buttons.forEach((button,idx) => {
+                if (idx !== 0) {
+                    switch (button.type) {
+                        case "reset":
+                            button.classList.add("btn-danger");
+                            break;
+                        case "submit":
+                            button.classList.add("btn-success");
+                            break;
+                    }
+                    button.classList.remove("btn-primary");
+                    button.classList.add("w-100");
+                }
+            });
+        });
+        
+    </script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "blog/base.html" %}
+{% load humanize %}
+{% load blog_tags %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+    <main class='col-12 col-md-8'>
+        <p class="headline-alert text-warning border-bottom border-3 pb-3">{{ post.title|title }}</p>
+        <p class="lead">
+            {{ post.body|format_markdown }}
+        </p>
+        <small class="text-muted">
+            Published {{ post.publish }} by <i class="text-warning">{{ post.author }}</i>
+        </small>
+
+        <p>
+            <a href="{% url "blog:post_share" post.pk %}">
+                Share this post
+            </a>
+        </p>
+        <p>
+            <a href="#comment_section" class="link-warning">
+                place a comment on this post
+            </a>
+        </p>
+        {% with comments.count as total_comments %}
+            <h2 class='headline-alert text-light'>{{total_comments}} comment{{total_comments|pluralize}} </h2>
+        {% endwith %}
+        {% for comment in comments %}
+        <div class="card my-2 w-75">
+            <div class="card-header bg-transparent">
+                <h4 class='headline-alert text-warning text-small '>
+                    comment {{forloop.counter}}  of {{comments.count}}
+                </h4>
+                <strong>{{ comment.name }}</strong>&nbsp;
+                commented&nbsp;
+                {{ comment.created | timesince  }} ago
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote card-blockquote">
+                    <p>&quot;{{ comment.body|truncatewords:40|format_markdown }}&quot;</p>
+                    <footer class="blockquote-footer">Email:
+                        <cite title="Source Title">
+                            {{ comment.email }}
+                        </cite>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+        {% empty %}
+            <p class="text-warning lead">
+                no comments to be shown
+            </p> 
+        {% endfor %}
+        {% include "blog/partials/comment_form.html" %}
+
+    </main>
+    {% include "blog/partials/sidebar.html" %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<div class="commment-section" id="comment_section">
+    <h2>Add a new comment</h2>
+    <form action="{% url "blog:post_comment" post.pk %}" method="post" class="my-3 w-75">
+        {% bootstrap_form form %}
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">{% bootstrap_button button_type="submit" content="save" %}
+        </div>
+            <div class="col">{% bootstrap_button button_type="reset" content="clear" %}</div>
+        </div>
+
+        {% block scripts %}
+            <script src={% static "js/share_form_script.js" %}></script>
+        {% endblock scripts %}
+    </form>
+</div>

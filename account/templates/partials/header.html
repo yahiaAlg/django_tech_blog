@@ -1,0 +1,24 @@
+{% load blog_tags %} {% load django_bootstrap5 %}
+
+<div class="container-fullwidth">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4"><a href="{% url 'blog:post_list' %}">System Symphosium</a></h1>
+      <p class="lead">
+        Harmonizing Linux Administration &amp; Online Business Strategies
+      </p>
+      <hr class="my-3" />
+      <div class="d-flex justify-content-between align-items-center">
+        <a
+          class="btn btn-primary btn-lg"
+          href="{% url 'blog:post_list' %}"
+          role="button"
+          >return back</a
+        >
+        <form action="{% url 'blog:search' %}" method="get" class="w-75">
+          {% if form %}{% searchbar search_form %}{% else %}{% searchbar %}{% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
